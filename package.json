@@ -1,0 +1,26 @@
+{
+  "name": "neinduction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --harmony-async-await --trace-deprecation ./index.js",
+    "mongo": "mongod --dbpath ./db &"
+  },
+  "author": "lucas",
+  "license": "ISC",
+  "devDependencies": {
+    "config-lite": "^2.1.0",
+    "koa": "^2.5.0",
+    "koa-body": "^2.5.0",
+    "koa-convert": "^1.2.0",
+    "koa-favicon": "^2.0.0",
+    "koa-router": "^7.4.0",
+    "koa-static2": "^0.1.8",
+    "koa-views": "^6.1.4",
+    "moment": "^2.21.0",
+    "mongoose": "^5.0.8",
+    "pug": "^2.0.0-rc.4"
+  }
+}

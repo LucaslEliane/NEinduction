@@ -1,0 +1,9 @@
+/**
+  * Project: NEinduction
+  * Author: Lucas Twilight
+  * Create Time: 2018-03-15 18:08
+  * Description: 
+  */
+.active .todo-list .list-item.completed {
+  display: none;
+}

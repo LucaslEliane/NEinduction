@@ -1,0 +1,23 @@
+/**
+  * Project: NEinduction
+  * Author: Lucas Twilight
+  * Create Time: 2018-03-05 18:57
+  * Description: 
+  */
+.container-center-helper {
+  float: left;
+  left: 50%;
+  position: relative;
+}
+.container {
+  width: 60%;
+  min-width: 40rem;
+
+  position: relative;
+  right: 50%;
+
+  background: white;
+}
+.container > .j-flag:first-child {
+  height: 4rem;
+}

@@ -1,0 +1,107 @@
+/**
+  * Project: NEinduction
+  * Author: Lucas Twilight
+  * Create Time: 2018-03-06 16:45
+  * Description: 
+  */
+
+ul.todo-unorder-list {
+  list-style: none;
+  margin: 0px;
+  padding: 0 0 0 .9rem;
+}
+li.list-item {
+  height: 3rem;
+  font-size: 1.5rem;
+  font-weight: lighter;
+}
+div.checkbox {
+  position: relative;
+  float: left;
+  margin: 0 2rem 0 0;
+  cursor: pointer;
+}
+div.checkbox label {
+  position: absolute;
+}
+.checkbox label:before { 
+  content: ''; 
+  position: absolute; 
+  left: -30px; 
+  top: .75rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid #ddd; 
+  border-radius: 50%; 
+  transition: all 0.3s ease; 
+  -webkit-transition: all 0.3s ease; 
+  -moz-transition: all 0.3s ease;
+  cursor: pointer;
+} 
+.checkbox label:after { 
+  content: ''; 
+  position: absolute; 
+  left: -21px;
+  top: 1rem;
+  width: 6px; 
+  height: 12px; 
+  border: 0; 
+  border-right: 1px solid #fff; 
+  border-bottom: 1px solid #fff; 
+  background: #fff; 
+  transform: rotate(45deg); 
+  -webkit-transform: rotate(45deg); 
+  -moz-transform: rotate(45deg); 
+  -ms-transform: rotate(45deg); 
+  transition: all 0.3s ease; 
+  -webkit-transition: all 0.3s ease; 
+  -moz-transition: all 0.3s ease;
+  cursor: pointer;
+}
+.checkbox input[type='checkbox']:checked + label:before {
+  background: #4cd764;
+  border-color: #4cd764;
+}
+.checkbox input[type='checkbox']:checked + label:after {
+  background: #4cd764;
+}
+input.toggle {
+  float: left;
+  position: relative;
+  height: 2rem;
+  width: 2rem;
+
+  cursor: pointer;
+}
+
+label.todo-content {
+  line-height: 3rem;
+}
+label.todo-content.completed {
+  text-decoration: line-through;
+  color: #AAA;
+  opacity: 0.5;
+}
+button.destroy {
+  float: right;
+  background: white;
+  color: mediumvioletred;
+  margin: 0 2rem 0 0;
+  font-size: 1.8rem;
+  font-weight: lighter;
+  cursor: pointer;
+  opacity: 0;
+  height: 3rem;
+}
+button.destroy::after {
+  content: "x";
+}
+button.destroy:hover {
+  opacity: 1;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -ms-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+

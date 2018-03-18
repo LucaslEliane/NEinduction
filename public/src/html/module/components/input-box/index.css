@@ -1,0 +1,52 @@
+/**
+  * Project: NEinduction
+  * Author: Lucas Twilight
+  * Create Time: 2018-03-05 19:11
+  * Description: 
+  */
+
+i.icon-arrow-down {
+  float: left;
+  position: relative;
+  height: 4rem;
+  width: 4rem;
+
+  cursor: pointer;
+}
+i.icon-arrow-down > svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  height: 2rem;
+  width: 2rem;
+  color: darkgrey;
+}
+
+input.input-box {
+  float: left;
+
+  height: 4rem;
+  padding: 0 1rem;
+
+  font-size: 2rem;
+  font-weight: lighter;
+
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+  color:    #AAA;
+  opacity: 0.5;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color:    #AAA;
+  opacity: 0.5;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color:    #AAA;
+  opacity: 0.5;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color:    #AAA;
+  opacity: 0.5;
+}

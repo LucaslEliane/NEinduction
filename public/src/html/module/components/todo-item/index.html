@@ -1,0 +1,36 @@
+<script src="index.js"></script>
+<meta charset="utf-8"/>
+<textarea name="txt" id="module-id-c2">
+  <div class="item-list">
+    <div class="js-flag"></div>
+    <div class="js-flag"></div>
+  </div>
+</textarea>
+<textarea name="jst" id="jst-todo-list">
+  <ul class="todo-unorder-list">
+    {list beg..end as y}
+      {var x=xlist[y]}
+    {if x.type}
+      <li class="list-item active" data-id="${x._id}">
+    {else}
+      <li class="list-item completed" data-id="${x_id}">
+    {/if}
+        <div class="checkbox check-button" data-id="${x._id}">
+          <input class="toggle" type="checkbox" id="todo-toggle-${y}" data-id="${x._id}"/>
+          <label for="todo-toggle-${y}" class="check-button"></label>
+        </div>
+        {if x.type}
+          <label class="todo-content">${x.content}</label>
+        {else}
+          <label class="todo-content completed">${x.content}</label>
+        {/if}
+        <button class="destroy" data-id="${x._id}" data-action="delete"></button>
+    </li>
+    {/list}
+  </ul>
+</textarea>
+
+<!-- @TEMPLATE -->
+<textarea name="js" data-src="./index.js"></textarea>
+<textarea name="css" data-src="./index.css"></textarea>
+<!-- /@TEMPLATE -->
