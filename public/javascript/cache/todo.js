@@ -37,12 +37,28 @@ NEJ.define([
   };
 
   _pro.__doDeleteItem = function(_options) {
-    var _data = _options.data || {};
-    _j._$request('/api/delete', {
-      method: 'POST',
-      data: _data,
-      onload: _options.onload
-    });
+    var _data = _options.data['_id'] || {};
+    if (_u._$isArray(_data)) {
+      _j._$request('/api/clearCompleted', {
+        method: 'POST',
+        data: {
+          '_id': _data
+        },
+        onload: function(_json) {
+          var _jsonData = _e._$text2type(_json, 'json');
+          if (_jsonData.status == 'ok') {
+            _options.onload(_jsonData.status);
+          }
+        }
+      })
+    } else {
+      _j._$request('/api/delete', {
+        method: 'POST',
+        data: _data,
+        onload: _options.onload
+      });
+    }
+
   };
 
   _pro.__doUpdateItem = function(_options) {
@@ -51,10 +67,11 @@ NEJ.define([
       method: 'POST',
       data: _data,
       onload: function(_json) {
-        var _jsonData = _e._$text2type(_json, 'json');
-        _options.data._onload(_jsonData.type);
+         var _jsonData = _e._$text2type(_json, 'json');
+         _options.data._onload(_jsonData);
+         _options.onload(_jsonData);
       }
-    })
+    });
   };
 
   _pro.__doAddItem = function(_options) {
@@ -68,8 +85,8 @@ NEJ.define([
         var _jsonData = _e._$text2type(_json, 'json');
         _data._onload(_jsonData);
       }
-    })
-  }
+    });
+  };
 
   return _p;
 });

@@ -34,7 +34,9 @@ NEJ.define([
       _t0._$getTextTemplate('module-id-c1')
     );
     this.__jFilters = _e._$getByClassName(this.__body, 'filters')[0];
+    this.__jClearCompleted = _e._$getByClassName(this.__body, 'clear-completed-link')[0];
     _v._$addEvent(this.__jFilters, 'click', this.__onFilterClick._$bind(this));
+    _v._$addEvent(this.__jClearCompleted, 'click', this.__onClearCompletedClick._$bind(this));
   };
 
   _pro.__onShow = function(_options) {
@@ -47,6 +49,7 @@ NEJ.define([
       _e._$attr(this.__jPreActiveFilter, 'class', _regResult[1] + ' actived');
     }
     this.__super(_options);
+
   };
 
   _pro.__onFilterClick = function(_event) {
@@ -54,6 +57,7 @@ NEJ.define([
     if (_path[1].localName === 'li' && !~_path[1].className.indexOf('actived')) {
       var _target = _path[1];
       var _targetOriginClass = _target.className;
+      _e._$attr(this.__jCountWrapper, 'class', _target.className);
       _target.className = _target.className + ' actived';
       _e._$attr(this.__jPreActiveFilter, 'class', this.__preActiveUMI);
       this.__preActiveUMI = _targetOriginClass;
@@ -61,9 +65,15 @@ NEJ.define([
     }
   };
 
-  _pro.__onFilterChangeMessageReceived = function(message) {
-    console.log(message);
-  }
+  _pro.__onClearCompletedClick = function(_event) {
+    this.__doPublishMessage(
+      'clearCompleted',
+      {
+        value: true
+      }
+    );
+  };
+
   // notify dispatcher
   _t1._$regist('component-todo-filter',_p._$$ModuleTodoFilter);
 });

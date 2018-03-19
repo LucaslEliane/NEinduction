@@ -13,6 +13,7 @@ NEJ.define([
     rules: {
       rewrite: {
         '404': '/m/todo/all/',
+        '/': '/m/todo/all/'
       },
       title: {
         '/m/todo/all/': 'all todo list',

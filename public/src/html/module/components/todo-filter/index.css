@@ -4,13 +4,19 @@
   * Create Time: 2018-03-06 15:09
   * Description: 
   */
-span {
-  line-height: 4rem;
-  float: left;
+span.clear-completed {
+  position: relative;
+  top: -4rem;
+  float: right;
   padding: 0 1rem;
   font-size: 1.1rem;
   font-weight: lighter;
   color: darkgrey;
+  line-height: 4rem;
+}
+
+span.clear-completed a.clear-completed-link {
+  cursor: pointer;
 }
 
 ul.filters {
@@ -28,6 +34,7 @@ ul.filters li {
 }
 
 ul.filters li a {
+  text-decoration: none;
   padding: 0.4rem;
   border: 1px solid transparent;
   -webkit-border-radius: 3px;

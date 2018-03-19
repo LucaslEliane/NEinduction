@@ -15,16 +15,17 @@ const KoaBody = require('koa-body')({
 
 module.exports = function(router) {
   router.get('/api/todos', async function(ctx, next) {
-    const data = await TodoModel.getTodos()
+    const data = await TodoModel.getTodos();
     ctx.body = data;
     next();
   });
 
   router.post('/api/delete', KoaBody, async function(ctx, next) {
     const field = ctx.request.body;
+    console.log(field);
     const _id = field._id;
     if (_id.length) {
-      const result = await TodoModel.deleteTodoById(_id)
+      const result = await TodoModel.deleteTodoById(_id);
       if (result.ok) {
         ctx.body = {
           'status': 'ok'
@@ -40,6 +41,26 @@ module.exports = function(router) {
     next();
   });
 
+  router.post('/api/clearCompleted', KoaBody, async function(ctx, next) {
+    const field = ctx.request.body;
+    const _ids = field['_id'].split(',');
+    const result = await TodoModel
+      .remove()
+      .where('_id')
+      .in(_ids)
+      .exec();
+
+    if (result.ok) {
+      ctx.body = {
+        'status': 'ok'
+      };
+    } else {
+      ctx.status = '400';
+      ctx.message = 'delete error'
+    }
+    next();
+  });
+
   router.post('/api/updateItem', KoaBody, async function(ctx, next) {
     const field = ctx.request.body;
     const _id = field._id;
@@ -51,7 +72,8 @@ module.exports = function(router) {
         if (data) {
           ctx.body = {
             _id: todo._id,
-            type: (!!todo.type ? 0 : 1)
+            type: (!!todo.type ? 0 : 1),
+            content: data.content
           };
         } else {
           ctx.status = '404';

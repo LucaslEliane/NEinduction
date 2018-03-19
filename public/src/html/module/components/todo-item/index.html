@@ -16,7 +16,11 @@
       <li class="list-item completed" data-id="${x_id}">
     {/if}
         <div class="checkbox check-button" data-id="${x._id}">
-          <input class="toggle" type="checkbox" id="todo-toggle-${y}" data-id="${x._id}"/>
+          {if x.type}
+            <input class="toggle" type="checkbox" id="todo-toggle-${y}" data-id="${x._id}"/>
+          {else}
+            <input class="toggle" type="checkbox" id="todo-toggle-${y}" data-id="${x._id}" checked/>
+          {/if}
           <label for="todo-toggle-${y}" class="check-button"></label>
         </div>
         {if x.type}

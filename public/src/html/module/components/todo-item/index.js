@@ -5,24 +5,18 @@
  * Description:
  */
 
-
-/*
- * ------------------------------------------
- * 首页列表模块实现文件
- * @version  1.0
- * @author   chenluyan_bupt@163.com
- * ------------------------------------------
- */
 NEJ.define([
   'base/klass',
   'base/element',
   'base/event',
+  'base/util',
   'util/dispatcher/module',
   'util/list/page',
   'util/template/tpl',
   'pro/module/module',
-  'pro/cache/blog'
-],function(_k,_e,_v,_t,_t0,_t1,_m,_d,_p,_o){
+  'pro/cache/todo',
+  'pro/cache/cache'
+],function(_k,_e,_v,_u,_t,_t0,_t1,_m,_d,_p,_o){
   var _pro;
   /**
    * 日志列表模块对象
@@ -44,14 +38,18 @@ NEJ.define([
     this.__body = _e._$html2node(
       _t1._$getTextTemplate('module-id-c2')
     );
+    // 由于该组件会被多次refresh，所以如果每次refresh的时候都执行消息监听
+    // 则会导致出现一次添加操作被多次执行，这个标志位用来保证消息监听只被添加一次
+    this.__showCount = 0;
+
     // 0 - list box
     // 1 - pager box
     var _list = _e._$getByClassName(this.__body,'js-flag');
     var _jTodoList = _list[0];
     _v._$addEvent(_jTodoList, 'click', this.__onUpdateItem._$bind(this));
 
+
     this.__mopt = {
-      limit:15,
       parent:_list[0],
       item:'jst-todo-list',
       cache:{
@@ -83,11 +81,19 @@ NEJ.define([
       if (this.__lmdl) this.__lmdl._$recycle();
       this.__mopt.cache.lkey = _doParseCKey(_options.param||_o);
       this.__lmdl = _t0._$$ListModulePG._$allocate(this.__mopt);
-      this.__doSubscribeMessage(
-        '/?/input-box/',
-        'addItem',
-        this.__onAddItemMessageReceived._$bind(this)
-      );
+      if (!this.__showCount) {
+        this.__doSubscribeMessage(
+          '/?/input-box/',
+          'addItem',
+          this.__onAddItemMessageReceived._$bind(this)
+        );
+        this.__doSubscribeMessage(
+          '/?/todo-filter/',
+          'clearCompleted',
+          this.__onClearCompletedMessageReceived._$bind(this)
+        );
+        this.__showCount++;
+      }
     };
   })();
 
@@ -107,17 +113,17 @@ NEJ.define([
       var _input = _e._$getSibling(_event.target, {
         backward: true
       });
-      _input.checked = !_input.checked;
       var _id = _e._$attr(_input, 'data-id');
-      var _onload = (function() {
+      var _onload = (function($this) {
         var _jListNode = _e._$getParent(_input, 't:li');
         var _jLabel = _e._$getChildren(_jListNode, 'todo-content')[0];
-        return function(type) {
-          type
+        return function(_json) {
+          _json.type
             ? _e._$attr(_jLabel, 'class', 'todo-content')
-            : _e._$attr(_jLabel, 'class', 'todo-content completed')
+            : _e._$attr(_jLabel, 'class', 'todo-content completed');
+          $this.__lmdl._$reload();
         };
-      })();
+      })(this);
       var _data = {
         _id: _id,
         _onload: _onload
@@ -136,6 +142,29 @@ NEJ.define([
       _onload: _onload._$bind(this)
     };
     this.__lmdl._$add(_data);
+  };
+
+  _pro.__onClearCompletedMessageReceived = function(message) {
+    if (message.data.value) {
+      var _list = this.__lmdl._$cache()['__cache']['box-1-list'];
+      if (_list && _list.length) {
+        var _i = 0;
+        var _deleteList = [];
+        while(_i < _list.length) {
+            if (!_list[_i].type) {
+            _deleteList.push(_list[_i]['_id']);
+          }
+          ++_i;
+        }
+        if (_deleteList.length) {
+          var _data = _deleteList;
+          this.__lmdl._$delete({
+            _id: _data
+          });
+          this.__lmdl._$reload();
+        }
+      }
+    }
   };
   /**
    * 订阅推送消息
