@@ -2,7 +2,7 @@
  * Project: NEinduction
  * Author: Lucas Twilight
  * Create Time: 2018-03-05 17:42
- * Description:
+ * Description: Koa服务器端根目录
  */
 
 const path = require('path')

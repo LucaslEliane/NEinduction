@@ -82,6 +82,17 @@ label.todo-content.completed {
   color: #AAA;
   opacity: 0.5;
 }
+label.todo-content input {
+  font-weight: lighter;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 1.8rem;
+  background: rgba(220,220,220,0.1);
+  padding: 0 0 0 1rem;
+  border: 1px solid rgba(200,200,200,0.2);
+  vertical-align: middle;
+  width: 20rem;
+}
 button.destroy {
   float: right;
   background: white;
@@ -103,5 +114,12 @@ button.destroy:hover {
   -ms-transition: opacity 0.5s;
   -o-transition: opacity 0.5s;
   transition: opacity 0.5s;
+}
+
+p.w-message {
+  line-height: 3rem;
+  padding: 0 2rem;
+  font-size: 1rem;
+  font-weight: lighter;
 }
 

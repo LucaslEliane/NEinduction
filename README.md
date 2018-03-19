@@ -23,3 +23,15 @@ npm run mongo
 npm run dev
 ```
 
+在浏览器中访问`localhost:9999`就可以看到效果
+
+## 基本功能
+
+1. 显示服务端的所有todos列表
+2. 添加新的todo元素
+3. 删除一个todo元素
+4. 清空所有的completed状态todo元素
+5. 修改一个active状态的todo元素内容
+6. 修改一个todo元素的状态
+7. 通过路由进行todo状态过滤
+

@@ -2,7 +2,7 @@
  * Project: NEinduction
  * Author: Lucas Twilight
  * Create Time: 2018-03-06 18:41
- * Description:
+ * Description: cache基类
  */
 
 NEJ.define([
@@ -33,8 +33,6 @@ NEJ.define([
     }
     _callback(_list);
   };
-
-
 
   return _p;
 });

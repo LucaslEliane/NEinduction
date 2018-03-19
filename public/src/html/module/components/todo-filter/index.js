@@ -2,7 +2,7 @@
  * Project: NEinduction
  * Author: Lucas Twilight
  * Create Time: 2018-03-06 15:09
- * Description:
+ * Description: todo-filter 模块脚本
  */
 
 
@@ -18,7 +18,7 @@ NEJ.define([
   var _pro;
   /**
    * 项目模块基类对象
-   * @class   {_$$ModuleAccountEdu}
+   * @class   {_$$ModuleTodoFilter}
    * @extends {_$$Module}
    * @param   {Object}  可选配置参数，已处理参数列表如下所示
    */
@@ -51,7 +51,9 @@ NEJ.define([
     this.__super(_options);
 
   };
-
+  /*
+  * 进行路由切换的class控制
+  * */
   _pro.__onFilterClick = function(_event) {
     var _path = _event.path;
     if (_path[1].localName === 'li' && !~_path[1].className.indexOf('actived')) {
@@ -65,7 +67,10 @@ NEJ.define([
     }
   };
 
-  _pro.__onClearCompletedClick = function(_event) {
+  /*
+  * 点击clear complated按钮的事件处理
+  * */
+  _pro.__onClearCompletedClick = function() {
     this.__doPublishMessage(
       'clearCompleted',
       {

@@ -2,7 +2,7 @@
  * Project: NEinduction
  * Author: Lucas Twilight
  * Create Time: 2018-03-06 18:56
- * Description:
+ * Description: Koa的数据路由
  */
 
 const KoaBody = require('koa-body')({
@@ -22,7 +22,6 @@ module.exports = function(router) {
 
   router.post('/api/delete', KoaBody, async function(ctx, next) {
     const field = ctx.request.body;
-    console.log(field);
     const _id = field._id;
     if (_id.length) {
       const result = await TodoModel.deleteTodoById(_id);
@@ -87,8 +86,24 @@ module.exports = function(router) {
       ctx.status = '400';
       ctx.message = 'wrong todo id';
     }
-
     next();
+  });
+
+  router.post('/api/updateItemContent', KoaBody, async function(ctx, next) {
+    const field = ctx.request.body;
+    const _id = field._id;
+    const _content = field._content;
+    const data = await TodoModel.updateContent({
+      _id,
+      _content,
+    }, moment().format('x'));
+    if (data.ok) {
+      const result = await TodoModel.getTodoById(_id);
+      ctx.body = result;
+    } else {
+      ctx.status = '400';
+      ctx.message = 'cannot update todo content'
+    }
   });
 
   router.post('/api/addItem', KoaBody, async function(ctx, next) {

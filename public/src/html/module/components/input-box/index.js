@@ -2,7 +2,7 @@
  * Project: NEinduction
  * Author: Lucas Twilight
  * Create Time: 2018-03-05 18:52
- * Description:
+ * Description: 输入框模块脚本文件
  */
 
 NEJ.define([
@@ -17,7 +17,7 @@ NEJ.define([
   var _pro;
   /**
    * 项目模块基类对象
-   * @class   {_$$ModuleAccountEdu}
+   * @class   {_$$ModuleInputBox}
    * @extends {_$$Module}
    * @param   {Object}  可选配置参数，已处理参数列表如下所示
    */
@@ -36,6 +36,10 @@ NEJ.define([
     _v._$addEvent(this.__jInputBox, 'keyup', this.__onAddItem._$bind(this));
   };
 
+  /*
+  * 添加一个新的todo元素，触发键盘事件，与todo-item模块进行通信
+  *
+  * */
   _pro.__onAddItem = function(_event) {
     var keyCode = _event.keyCode;
     if (keyCode === 13 && !!this.__jInputBox.value) {
